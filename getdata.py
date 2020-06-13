@@ -10,6 +10,8 @@ width = 300
 height = 300
 MIN_DESCRIPTOR = 32
 imageSaveSwitch = False
+imageMaxiCnt = 100
+curImageCnt = 0
 
 def getRoi(frame, x0, y0, width, height):
     cv.rectangle(frame, (x0, y0), (x0 + width, y0 + height), (0, 255, 0))
@@ -82,12 +84,12 @@ def saveSample(folder, image):
     cv.imwrite(filename, image)
     print('saving ' + filename)
     imageCnt += 1
-    time.sleep(0.5)
+    time.sleep(0.1)
 
 subtractor = cv.createBackgroundSubtractorKNN(detectShadows=True)
 
 capture = cv.VideoCapture(0)
-path = './data/'
+path = './data/good/'
 while True:
     ret, frame = capture.read()
     frame = cv.flip(frame, 1)
@@ -96,8 +98,9 @@ while True:
     Skin = getSkin(roi)
     result, fourierResult = fourier(Skin)
     cv.imshow('result', result)
-    if imageSaveSwitch:
+    if imageSaveSwitch and curImageCnt < imageMaxiCnt:
         saveSample(path, result)
+        curImageCnt = curImageCnt + 1
     key = cv.waitKey(1) & 0xff
     if key == ord('q'):
         break
