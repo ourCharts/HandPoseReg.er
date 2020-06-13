@@ -136,3 +136,9 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# custom
+xtest.pickle
+xtrain.pickle
+ytest.pickle
+ytrain.pickle

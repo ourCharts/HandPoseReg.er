@@ -89,7 +89,7 @@ def saveSample(folder, image):
 subtractor = cv.createBackgroundSubtractorKNN(detectShadows=True)
 
 capture = cv.VideoCapture(0)
-path = './data/good/'
+path = './data/two/'
 while True:
     ret, frame = capture.read()
     frame = cv.flip(frame, 1)
