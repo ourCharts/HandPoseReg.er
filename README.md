@@ -1,5 +1,10 @@
 ## HandPoseReg
 Regcognize some gesture to control your PC.👌
+### Environment
+In order to build the environment, run
+```python
+pip install -r requirements.txt
+```
 ### getdata.py
 Run getdata.py to get some training samples.<br>
 Press "s" to start recording your gesture.<br>

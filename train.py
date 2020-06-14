@@ -34,5 +34,5 @@ model = tf.keras.Sequential([
 model.compile(loss='categorical_crossentropy', optimizer=tf.optimizers.RMSprop(learning_rate=0.0001), metrics=['accuracy'])
 model.fit(xtrain, ytrain, epochs=10, batch_size=32)
 model.evaluate(xtest, ytest, verbose=2)
-print(xtrain.shape)
-print(ytrain.shape)
+# print(xtrain.shape)
+# print(ytrain.shape)
