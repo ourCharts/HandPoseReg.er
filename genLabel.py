@@ -15,6 +15,7 @@ for subFolder in dataLeafFolders:
     path = dataRootFolder + subFolder + '/'
     for imageName in os.listdir(path):
         image = cv.imread(path + imageName)
+        image = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
         image = cv.resize(image, (128, 128))
         image = np.expand_dims(image, axis=2)
         data.append(image)

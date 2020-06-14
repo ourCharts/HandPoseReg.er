@@ -14,7 +14,6 @@ imageMaxiCnt = 100
 curImageCnt = 0
 
 def getRoi(frame, x0, y0, width, height):
-    cv.rectangle(frame, (x0, y0), (x0 + width, y0 + height), (0, 255, 0))
     roi = frame[y0:y0 + height, x0:x0 + width]
     cv.imshow('roi', roi)
     return roi
@@ -93,6 +92,7 @@ path = './data/two/'
 while True:
     ret, frame = capture.read()
     frame = cv.flip(frame, 1)
+    cv.rectangle(frame, (x0, y0), (x0 + width, y0 + height), (0, 255, 0))
     cv.imshow('video', frame)
     roi = getRoi(frame, x0, y0 ,width, height)
     Skin = getSkin(roi)
