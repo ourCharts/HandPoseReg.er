@@ -6,3 +6,5 @@ Press "s" to start recording your gesture.<br>
 Press "q" to quit.
 ### genLabel.py
 Run genLabel.py to generate labels for the images in data folder.
+### train.py
+Run train.py to train the model.
