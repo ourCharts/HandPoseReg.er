@@ -73,7 +73,7 @@ def fourier(frame):
 def debug(name, frame):
     cv.imshow(name, frame)
 
-imageMaxiCnt = 300
+imageMaxiCnt = 100
 curImageCnt = 0
 imageCnt = 0
 
@@ -87,10 +87,12 @@ def saveSample(folder, image):
     imageCnt += 1
     time.sleep(0.1)
 
+gesture = input('请输入手势序号')
+guest = input('请输入样本人名字')
 subtractor = cv.createBackgroundSubtractorKNN(detectShadows=True)
 
 capture = cv.VideoCapture(0)
-path = './data/4/'
+path = './data/'+gesture+'/'+guest+'/'
 while True:
     ret, frame = capture.read()
     frame = cv.flip(frame, 1)
