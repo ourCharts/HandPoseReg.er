@@ -10,8 +10,6 @@ width = 300
 height = 300
 MIN_DESCRIPTOR = 32
 imageSaveSwitch = False
-imageMaxiCnt = 100
-curImageCnt = 0
 
 def getRoi(frame, x0, y0, width, height):
     roi = frame[y0:y0 + height, x0:x0 + width]
@@ -75,6 +73,10 @@ def fourier(frame):
 def debug(name, frame):
     cv.imshow(name, frame)
 
+imageMaxiCnt = 300
+curImageCnt = 100
+
+
 def saveSample(folder, image):
     if not os.path.exists(folder):
         os.mkdir(folder)
@@ -88,7 +90,7 @@ def saveSample(folder, image):
 subtractor = cv.createBackgroundSubtractorKNN(detectShadows=True)
 
 capture = cv.VideoCapture(0)
-path = './data/two/'
+path = './data/0/'
 while True:
     ret, frame = capture.read()
     frame = cv.flip(frame, 1)

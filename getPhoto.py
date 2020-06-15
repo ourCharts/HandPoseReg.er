@@ -9,7 +9,7 @@ while True:
         cv2.imshow("frame", frame)
         index += 1
         if index % 5 == 0:
-            cv2.imwrite("./" + str(index) + ".jpg", frame)
+            cv2.imwrite("./king/" + str(index) + ".jpg", frame)
         c = cv2.waitKey(50)
         if c == 27: # ESC
             break
