@@ -74,8 +74,8 @@ def debug(name, frame):
     cv.imshow(name, frame)
 
 imageMaxiCnt = 300
-curImageCnt = 100
-
+curImageCnt = 0
+imageCnt = 0
 
 def saveSample(folder, image):
     if not os.path.exists(folder):
@@ -90,7 +90,7 @@ def saveSample(folder, image):
 subtractor = cv.createBackgroundSubtractorKNN(detectShadows=True)
 
 capture = cv.VideoCapture(0)
-path = './data/0/'
+path = './data/4/'
 while True:
     ret, frame = capture.read()
     frame = cv.flip(frame, 1)
