@@ -143,3 +143,6 @@ xtrain.pickle
 ytest.pickle
 ytrain.pickle
 .vs/
+data/
+Scripts/
+pyvenv.cfg
