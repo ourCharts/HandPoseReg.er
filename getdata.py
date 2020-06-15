@@ -92,7 +92,7 @@ guest = input('请输入样本人名字')
 subtractor = cv.createBackgroundSubtractorKNN(detectShadows=True)
 
 capture = cv.VideoCapture(0)
-path = './data/'+gesture+'/'+guest+'/'
+path = './data/' + gesture + '/' + guest + '/'
 while True:
     ret, frame = capture.read()
     frame = cv.flip(frame, 1)
