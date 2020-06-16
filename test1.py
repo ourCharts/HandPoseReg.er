@@ -117,10 +117,10 @@ while True:
     maxmax = -1
     maxnum = -1
     for idx,item in enumerate(tmp):
-        if item>maxmax:
+        if item > maxmax:
             maxmax = item
             maxnum =idx
-    print("手势是",maxnum)
+    print("手势是",maxnum + 1)
     time.sleep(0.01)
     if imageSaveSwitch and curImageCnt < imageMaxiCnt:
         curImageCnt = curImageCnt + 1

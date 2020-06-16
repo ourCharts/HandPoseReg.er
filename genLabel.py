@@ -13,13 +13,16 @@ labels = []
 
 for subFolder in dataLeafFolders:
     path = dataRootFolder + subFolder + '/'
-    for imageName in os.listdir(path):
-        image = cv.imread(path + imageName)
-        image = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
-        image = cv.resize(image, (128, 128))
-        image = np.expand_dims(image, axis=2)
-        data.append(image)
-        labels.append(int(subFolder))
+    for sampleFolder in os.listdir(path):
+        samplePath = path + sampleFolder + '/'
+        for imageName in os.listdir(samplePath):
+            print('reading ' + samplePath + imageName)
+            image = cv.imread(samplePath + imageName)
+            image = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+            image = cv.resize(image, (128, 128))
+            image = np.expand_dims(image, axis=2)
+            data.append(image)
+            labels.append(int(subFolder))
 
 data = np.array(data, dtype=float)
 data = data / 255.0
