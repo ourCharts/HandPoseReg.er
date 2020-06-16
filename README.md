@@ -1,7 +1,7 @@
 ## HandPoseReg
 Regcognize some gesture to control your PC.👌
 ### Environment
-In order to build the environment, run
+To build the environment, run
 ```python
 pip install -r requirements.txt
 ```
