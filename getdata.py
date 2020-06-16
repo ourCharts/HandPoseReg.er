@@ -4,7 +4,7 @@ import numpy as np
 import os
 
 imageCnt = 0
-x0 = 300
+x0 = 100
 y0 = 100
 width = 300
 height = 300
@@ -73,7 +73,7 @@ def fourier(frame):
 def debug(name, frame):
     cv.imshow(name, frame)
 
-imageMaxiCnt = 100
+imageMaxiCnt = 300
 curImageCnt = 0
 imageCnt = 0
 
@@ -87,8 +87,8 @@ def saveSample(folder, image):
     imageCnt += 1
     time.sleep(0.1)
 
-gesture = input('请输入手势序号')
-guest = input('请输入样本人名字')
+gesture = input('请输入手势序号 ')
+guest = input('请输入样本人名字 ')
 subtractor = cv.createBackgroundSubtractorKNN(detectShadows=True)
 
 capture = cv.VideoCapture(0)
@@ -110,6 +110,14 @@ while True:
         break
     elif key == ord('s'):
         imageSaveSwitch = not imageSaveSwitch
+    elif key == ord('j'):
+        x0 -= 5 
+    elif key == ord('l'):
+        x0 += 5
+    elif key == ord('i'):
+        y0 -= 5
+    elif key == ord('k'):
+        y0 += 5
 
 capture.read()
 cv.destroyAllWindows()

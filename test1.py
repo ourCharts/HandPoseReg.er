@@ -129,6 +129,14 @@ while True:
         break
     elif key == ord('s'):
         imageSaveSwitch = not imageSaveSwitch
+    elif key == ord('j'):
+        x0 -= 5 
+    elif key == ord('l'):
+        x0 += 5
+    elif key == ord('i'):
+        y0 -= 5
+    elif key == ord('k'):
+        y0 += 5
 
 capture.read()
 cv.destroyAllWindows()
