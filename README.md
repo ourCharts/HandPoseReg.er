@@ -13,3 +13,10 @@ Press "q" to quit.
 Run genLabel.py to generate labels for the images in data folder.
 ### train.py
 Run train.py to train the model.
+### How to control the position of roi(the green region)?
+| key  | operation  |
+| ---- | ---------- |
+| j    | move left  |
+| l    | move right |
+| i    | move up    |
+| k    | move down  |
