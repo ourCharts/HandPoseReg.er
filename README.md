@@ -1,5 +1,19 @@
 ## HandPoseReg
 Regcognize some gesture to control your PC.👌
+
+## Run desktop client-end to control PC
+## Environment
+To build the environment, get in /electron/ and run
+```nodejs
+npm install
+```
+## Run
+
+```nodejs
+npm start
+```
+
+## Train Model in Python
 ### Environment
 To build the environment, run
 ```python
