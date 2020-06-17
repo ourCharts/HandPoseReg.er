@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Hello OpenCV.js</title>
+
+  <style>
+    video{
+              transform: rotateY(180deg);
+              -webkit-transform: rotateY(180deg);    /* Safari 和 Chrome */
+              -moz-transform: rotateY(180deg);
+          }
+  </style>
+</head>
+
+<body>
+  <h2>Hello OpenCV.js</h2>
+  <p id="status">OpenCV.js is loading...</p>
+  <div>
+    <video width="700" height="700" id="video"></video>
+    <!-- <canvas width="640" height="480" id="outputCanvas"></canvas> -->
+    <canvas id="canvasOutput"></canvas> 
+    <span>0</span>  
+    <canvas id="canvasOutput1"></canvas>
+    <span>1</span>  
+    <canvas id="canvasOutput2"></canvas>
+    <span>2</span>  
+    <canvas id="canvasOutput3"></canvas>
+    <span>3</span>  
+  </div>  
+  <script async src="index.js" onload="openCVonload()" type="text/javascript"></script>
+
+</body>
+
+</html>
