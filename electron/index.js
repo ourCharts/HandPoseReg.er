@@ -23,9 +23,8 @@ var openCVonload = async function () {
     // const tf = require('@tensorflow/tfjs');
     const tf = require('@tensorflow/tfjs-node');
     // require('@tensorflow/tfjs-node')
-    tf.setBackend('cpu');
+    // tf.setBackend('cpu');
     const model = await tf.loadLayersModel('./model.json');
-    console.log(model);
     
     document.getElementById('status').innerHTML = 'opencv is ready';
     getMedia();
@@ -58,12 +57,7 @@ var openCVonload = async function () {
             // console.log(strstr)
             arr.push(tmpArr);
         }
-        const tensor = tf.tensor(out);
-        model.predict(tensor).print();
-        // console.log(model.predict(out))
-        // console.log(out);
-        // console.log(two.channels());
-        // console.log(two.depth());
+        model.predict(tf.tensor(out)).print();
         cv.imshow('canvasOutput1', result);
         cv.imshow('canvasOutput2', two);
         two.delete();
