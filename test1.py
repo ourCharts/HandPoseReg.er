@@ -4,6 +4,8 @@ import numpy as np
 import os
 import tensorflow as tf
 import time
+import pyautogui
+import eel
 
 imageCnt = 0
 x0 = 300
@@ -101,42 +103,63 @@ def get_real_photo(photo):
     image = (np.expand_dims(image,0))
     return image
 
-capture = cv.VideoCapture(0)
-path = './data/4/'
-new_model = tf.keras.models.load_model('new_model.h5')
-while True:
-    ret, frame = capture.read()
-    frame = cv.flip(frame, 1)
-    cv.rectangle(frame, (x0, y0), (x0 + width, y0 + height), (0, 255, 0))
-    cv.imshow('video', frame)
-    roi = getRoi(frame, x0, y0 ,width, height)
-    Skin = getSkin(roi)
-    result, fourierResult = fourier(Skin)
-    cv.imshow('result', result)
-    tmp = new_model.predict(get_real_photo(result))[0]
-    maxmax = -1
-    maxnum = -1
-    for idx,item in enumerate(tmp):
-        if item > maxmax:
-            maxmax = item
-            maxnum =idx
-    print("手势是",maxnum + 1)
-    time.sleep(0.01)
-    if imageSaveSwitch and curImageCnt < imageMaxiCnt:
-        curImageCnt = curImageCnt + 1
-    key = cv.waitKey(1) & 0xff
-    if key == ord('q'):
-        break
-    elif key == ord('s'):
-        imageSaveSwitch = not imageSaveSwitch
-    elif key == ord('j'):
-        x0 -= 5 
-    elif key == ord('l'):
-        x0 += 5
-    elif key == ord('i'):
-        y0 -= 5
-    elif key == ord('k'):
-        y0 += 5
+def alt_tab():
+    pyautogui.keyDown('alt')
+    time.sleep(0.2)
+    pyautogui.press('tab')
+    time.sleep(0.5)
+    pyautogui.press('tab')
+    time.sleep(0.5)
+    pyautogui.press('tab')
+    time.sleep(0.5)
+    pyautogui.keyUp('alt')
 
-capture.read()
-cv.destroyAllWindows()
+def work():
+    global x0
+    global y0
+    global imageSaveSwitch
+    capture = cv.VideoCapture(0)
+    path = './data/4/'
+    new_model = tf.keras.models.load_model('new_model.h5')
+    while True:
+        ret, frame = capture.read()
+        frame = cv.flip(frame, 1)
+        cv.rectangle(frame, (x0, y0), (x0 + width, y0 + height), (0, 255, 0))
+        cv.imshow('video', frame)
+        roi = getRoi(frame, x0, y0 ,width, height)
+        Skin = getSkin(roi)
+        result, fourierResult = fourier(Skin)
+        cv.imshow('result', result)
+        tmp = new_model.predict(get_real_photo(result))[0]
+        maxmax = -1
+        maxnum = -1
+        for idx,item in enumerate(tmp):
+            if item > maxmax:
+                maxmax = item
+                maxnum =idx
+        print("手势是", maxnum + 1)
+        if maxnum + 1 == 5:
+            alt_tab()
+        time.sleep(0.01)
+        if imageSaveSwitch and curImageCnt < imageMaxiCnt:
+            curImageCnt = curImageCnt + 1
+        key = cv.waitKey(1) & 0xff
+        if key == ord('q'):
+            break
+        elif key == ord('s'):
+            imageSaveSwitch = not imageSaveSwitch
+        elif key == ord('j'):
+            x0 -= 5 
+        elif key == ord('l'):
+            x0 += 5
+        elif key == ord('i'):
+            y0 -= 5
+        elif key == ord('k'):
+            y0 += 5
+
+    capture.read()
+    cv.destroyAllWindows()
+
+eel.init('eelweb')
+
+eel.start('index.html', port=0, size=(300, 150))

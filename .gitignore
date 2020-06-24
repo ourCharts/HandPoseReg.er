@@ -146,3 +146,6 @@ ytrain.pickle
 data/
 Scripts/
 pyvenv.cfg
+/electron/node_modules/
+/electron/.vscode/
+__pycache__/
