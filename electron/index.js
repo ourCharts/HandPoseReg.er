@@ -21,7 +21,9 @@ function getMedia() {
 }
 
 
-
+let count = 0;
+let gesture_arr = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+let controlLock = true;
 const openCVonload = async function () {
   // const tf = require('@tensorflow/tfjs');
   const tf = require('@tensorflow/tfjs');
@@ -60,7 +62,6 @@ const openCVonload = async function () {
         tmpArr.push([two.ucharAt(iter, j)]);
         strstr += two.ucharAt(iter, j) + ',';
       }
-      // console.log(strstr)
       arr.push(tmpArr);
     }
     let predictResult = model.predict(tf.tensor(out));
@@ -74,20 +75,32 @@ const openCVonload = async function () {
           maxiidx = idx;
         }
       }
-      const gesture = maxiidx + 1;
-      if (preGes == -1 && curGes == -1) {
-        curGes = gesture;
-        preGes = gesture;
-      } else {
-        curGes = gesture
-        if (curGes === preGes) {
-          sameGesCnt++;
+
+      let gesture = maxiidx;
+      gesture_arr[gesture]++;
+      count++;
+      if (count >= 10) {
+        gesture, max_count = max_gesture();
+        if (max_count > 8) {
+          gesture += 1;
+          if (gesture == 5) {
+            if (controlLock){
+              lock(false);
+              controlLock = false;
+            }
+            else{
+              lock(true);
+              controlLock = true;
+            }
+          }
+          console.log('手势：' + gesture);
+          ipc.send('gesture', gesture);
         }
-        if (sameGesCnt > 50) {
-          ipc.send('gesture', curGes);
-          sameGesCnt = 0;
+        else {
+          console.log('请调整好手势');
         }
-        preGes = curGes;
+        clear();
+        count = 0;
       }
     });
     cv.imshow('canvasOutput1', result);
@@ -137,4 +150,27 @@ function getSkin(origin) {
   skin.delete();
   tmp.delete();
   return result;
+}
+function lock(flag) {
+  if (flag) {
+
+    document.getElementById('lock').innerHTML = 'lock!';
+  }
+  else {
+    document.getElementById('lock').innerHTML = 'unlock!';
+  }
+}
+function clear() {
+  gesture_arr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+}
+function max_gesture() {
+  let max = -1; let gesture_idx = -1;
+  for (let index = 0; index < gesture_arr.length; index++) {
+    const element = gesture_arr[index];
+    if (max < element) {
+      max = element;
+      gesture_idx = index;
+    }
+  }
+  return gesture_idx, max;
 }
