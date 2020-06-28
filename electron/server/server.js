@@ -24,7 +24,7 @@ function closeWindow() {
   robot.keyToggle('alt', 'down')
   robot.keyTap('f4')
   robot.keyToggle('alt', 'up')
-
+  
 }
 function altTab() {
   console.log('altTab')
@@ -70,7 +70,6 @@ const server = net.createServer(function (sock) {
     }
     if (controlable) {
       if (directable) {
-
         if (stringifyData === '1') {
           console.log('up')
           robot.keyTap('up')
@@ -90,7 +89,7 @@ const server = net.createServer(function (sock) {
       }
       else {
         if (stringifyData != pre_gesture) {
-          clear_key();
+          clear_key()
         }
         if (stringifyData === '6') {
           audioMute()

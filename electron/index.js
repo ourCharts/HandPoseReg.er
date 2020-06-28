@@ -1,12 +1,14 @@
 const cv = require('./opencv.js');
-// const robot = require('robotjs')
 let video = document.getElementById("video");
 let Switch = false;
+const messageDiv = document.getElementById('Message')
 
 function getMedia() {
   let constraints = {
     video: {
-      width: 400, height: 400, facingMode: 'user',
+      width: 400, 
+      height: 400, 
+      facingMode: 'user',
       mirrored: true
     },
     audio: false,
@@ -34,7 +36,7 @@ const openCVonload = async function () {
   let curGes = -1;
   let sameGesCnt = 0;
 
-  document.getElementById('status').innerHTML = 'opencv is ready';
+  // document.getElementById('status').innerHTML = 'opencv is ready';
   getMedia();
   setInterval(() => {
     // setTimeout(() => {
@@ -84,26 +86,26 @@ const openCVonload = async function () {
         if (max_count > 8) {
           gesture += 1;
           if (gesture == 5) {
-            if (controlLock){
+            if (controlLock) {
               lock(false);
               controlLock = false;
-            }
-            else{
+            } else {
               lock(true);
               controlLock = true;
             }
           }
           console.log('手势：' + gesture);
+          messageDiv.innerHTML = 'Give me your gesture 😊'
           ipc.send('gesture', gesture);
-        }
-        else {
+        } else {
           console.log('请调整好手势');
+          messageDiv.innerHTML = 'Please adjust your gesture 🤔'
         }
         clear();
         count = 0;
       }
     });
-    cv.imshow('canvasOutput1', result);
+    // cv.imshow('canvasOutput1', result);
     cv.imshow('canvasOutput2', two);
     two.delete();
     result.delete();
@@ -151,18 +153,20 @@ function getSkin(origin) {
   tmp.delete();
   return result;
 }
+
 function lock(flag) {
   if (flag) {
-
-    document.getElementById('lock').innerHTML = 'lock!';
+    document.getElementById('lockStatus').innerHTML = '🔒 Locked';
   }
   else {
-    document.getElementById('lock').innerHTML = 'unlock!';
+    document.getElementById('lockStatus').innerHTML = '🔓 Unlocked';
   }
 }
+
 function clear() {
   gesture_arr = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 }
+
 function max_gesture() {
   let max = -1; let gesture_idx = -1;
   for (let index = 0; index < gesture_arr.length; index++) {
@@ -174,3 +178,8 @@ function max_gesture() {
   }
   return gesture_idx, max;
 }
+
+document.getElementById('closeWindow').addEventListener('click', function () {
+  // ipc.send('closewindow')
+  console.log('debug1')
+})
