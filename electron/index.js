@@ -156,7 +156,7 @@ function getSkin(origin) {
 
 function lock(flag) {
   if (flag) {
-    document.getElementById('lockStatus').innerHTML = '🔒 Locked';
+    document.getElementById('lockStatus').innerHTML = '🔐 Locked';
   }
   else {
     document.getElementById('lockStatus').innerHTML = '🔓 Unlocked';
@@ -180,6 +180,6 @@ function max_gesture() {
 }
 
 document.getElementById('closeWindow').addEventListener('click', function () {
-  // ipc.send('closewindow')
-  console.log('debug1')
+  ipc.send('closewindow')
+  // console.log('debug1')
 })
