@@ -178,7 +178,6 @@ function max_gesture() {
   }
   return gesture_idx, max;
 }
-
 document.getElementById('closeWindow').addEventListener('click', function () {
   ipc.send('closewindow')
   // console.log('debug1')

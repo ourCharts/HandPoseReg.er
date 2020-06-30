@@ -4,8 +4,6 @@ import numpy as np
 import os
 import tensorflow as tf
 import time
-import pyautogui
-import eel
 
 imageCnt = 0
 x0 = 300

@@ -17,6 +17,9 @@ def getRoi(frame, x0, y0, width, height):
     return roi
 
 def getSkin(frame):
+    # tmp = cv.cvtColor(frame, cv.COLOR_GRAY2BGR)
+    # frame = cv.cvtColor(tmp, cv.COLOR_BGR2YCR_CB)
+    # print('frame.shape: {}'.format(frame.shape))
     ycrcb = cv.cvtColor(frame, cv.COLOR_BGR2YCR_CB)
     y, cr, cb = cv.split(ycrcb)
     cr_ = cv.GaussianBlur(cr, (5, 5), 0) # 高斯模糊
@@ -100,6 +103,7 @@ while True:
     cv.imshow('video', frame)
     roi = getRoi(frame, x0, y0 ,width, height)
     Skin = getSkin(roi)
+    cv.imshow('skin', Skin)
     result, fourierResult = fourier(Skin)
     cv.imshow('result', result)
     if imageSaveSwitch and curImageCnt < imageMaxiCnt:
@@ -110,13 +114,13 @@ while True:
         break
     elif key == ord('s'):
         imageSaveSwitch = not imageSaveSwitch
-    elif key == ord('j'):
+    elif key == ord('h'):
         x0 -= 5 
     elif key == ord('l'):
         x0 += 5
-    elif key == ord('i'):
-        y0 -= 5
     elif key == ord('k'):
+        y0 -= 5
+    elif key == ord('j'):
         y0 += 5
 
 capture.read()
